@@ -1,4 +1,5 @@
 import './App.css';
+import apiKey from './config';
 
 function App() {
   return (
