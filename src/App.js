@@ -21,10 +21,11 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path="/" component={() => <PhotoContainer data={'empty'} />}></Route>
-                    <Route path="/cats" component={() => <PhotoContainer data={'empty'} />}></Route>
-                    <Route path="/dogs" component={() => <PhotoContainer data={'empty'} />}></Route>
-                    <Route path="/computers" component={() => <PhotoContainer data={'empty'} />}></Route>
-                    <Route component={() => <PhotoContainer data={'empty'} />}></Route>
+                    <Route path="/cats" component={() => <PhotoContainer data={'Cats'} />}></Route>
+                    <Route path="/dogs" component={() => <PhotoContainer data={'Dogs'} />}></Route>
+                    <Route path="/computers" component={() => <PhotoContainer data={'Computers'} />}></Route>
+                    <Route path="/search" component={() => <PhotoContainer data={'Search'} />}></Route>
+                    <Route component={() => <PhotoContainer data={'NotFound'} />}></Route>
                 </Switch>
             </div>
         </BrowserRouter>
