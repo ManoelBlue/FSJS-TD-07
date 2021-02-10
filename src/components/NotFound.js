@@ -2,9 +2,11 @@
 
 const NotFound = (props) => {
     return (
-        <div>
-            <h1>Page not found!!</h1>
-            <p>Sorry, but the page are looking for was not found.</p>
-        </div>
+        <li class="not-found">
+            <h3>No Results Found</h3>
+            <p>You search did not return any results. Please try again.</p>
+        </li>
     )
 }
+
+export default NotFound;

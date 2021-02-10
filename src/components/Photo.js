@@ -7,3 +7,5 @@ const Photo = (props) => {
         </li>
     )
 }
+
+export default Photo;
