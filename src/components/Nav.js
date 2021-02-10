@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 // Nav stateless component:
 const Nav = (props) => {
     return (
-        <nav class="main-nav">
+        <nav className="main-nav">
             <ul>
                 <li><NavLink to='/cats'>Cats</NavLink></li>
                 <li><NavLink to='/dogs'>Dogs</NavLink></li>
