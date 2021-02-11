@@ -13,11 +13,19 @@ class App extends Component {
         super()
         this.state = {
             photos: [],
+            cats: [],
+            dogs: [],
+            computers: [],
+            all: []
         }
     }
 
     componentDidMount() {
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=3b8cf52d0dccbaa319e3079918057b36&safe_search=cats&per_page=&format=json&nojsoncallback=1&auth_token=72157718248197602-f8319b6f96d9013e&api_sig=77278637a3a58b2ff6fe13a56d220736`)
+        this.fetchData('https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=3b8cf52d0dccbaa319e3079918057b36&text=cats&privacy_filter=1&per_page=24&format=json&nojsoncallback=1&auth_token=72157718248197602-f8319b6f96d9013e&api_sig=d1764731a6ba869f5a545a520a76849d');
+    }
+
+    fetchData(url) {
+        axios.get(url)
             .then(response => {
                 this.setState({
                     photos: response.data.photos.photo
@@ -27,8 +35,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.photos);
-
         return (
         <BrowserRouter>
             <div className="container">
