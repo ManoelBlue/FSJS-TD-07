@@ -41,7 +41,6 @@ class App extends Component {
                     <Route path="/dogs" render={() => <PhotoContainer data={'Dogs'} />}></Route>
                     <Route path="/computers" render={() => <PhotoContainer data={'Computers'} />}></Route>
                     <Route path="/search" render={() => <PhotoContainer data={'Search'} />}></Route>
-                    <Route render={() => <PhotoContainer data={'NotFound'} />}></Route>
                 </Switch>
             </div>
         </BrowserRouter>
