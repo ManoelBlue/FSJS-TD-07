@@ -12,19 +12,19 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            photos: [],
-            cats: [],
-            dogs: [],
-            computers: [],
-            all: []
+            photos: []
         }
     }
 
     componentDidMount() {
-        this.fetchData('https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=3b8cf52d0dccbaa319e3079918057b36&text=cats&privacy_filter=1&per_page=24&format=json&nojsoncallback=1&auth_token=72157718248197602-f8319b6f96d9013e&api_sig=d1764731a6ba869f5a545a520a76849d');
+        this.fetchData('cats');
     }
 
-    fetchData(url) {
+    fetchData(search) {
+        let searchText = search.replace(/\s/gi, '+');
+        let searchTag = search.replace(/\s/gi, '%2C');
+        let url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&tag_mode=all&text=${searchText}&safe_search=3&content_type=1&per_page=24&format=json&nojsoncallback=1`;
+
         axios.get(url)
             .then(response => {
                 this.setState({
