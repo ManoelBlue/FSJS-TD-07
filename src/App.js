@@ -17,7 +17,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.fetchData('cats');
+        this.fetchData('animals');
     }
 
     fetchData(search) {
@@ -32,6 +32,8 @@ class App extends Component {
                 })
             })
             .catch(error => console.error('Error fetching data', error));
+
+        return this.state.photos;
     }
 
     render() {
@@ -42,10 +44,10 @@ class App extends Component {
                 <Nav></Nav>
 
                 <Switch>
-                    <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
-                    <Route path="/cats" render={() => <PhotoContainer data={'Cats'} />}></Route>
-                    <Route path="/dogs" render={() => <PhotoContainer data={'Dogs'} />}></Route>
-                    <Route path="/computers" render={() => <PhotoContainer data={'Computers'} />}></Route>
+                    <Route exact path="/" render={() => <PhotoContainer data={this.fetchData('animals')} />}></Route>
+                    <Route path="/cats" render={() => <PhotoContainer data={this.fetchData('cat')} />}></Route>
+                    <Route path="/dogs" render={() => <PhotoContainer data={this.fetchData('dog')} />}></Route>
+                    <Route path="/computers" render={() => <PhotoContainer data={this.fetchData('computer')} />}></Route>
                     <Route path="/search" render={() => <PhotoContainer data={'Search'} />}></Route>
                 </Switch>
             </div>
