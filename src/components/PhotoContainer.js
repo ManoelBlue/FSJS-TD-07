@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
 const PhotoContainer = props => {
+    console.log(props);
     let photos = props.data.map(photo => <Photo key={photo.id} data={photo} />);
 
     return (

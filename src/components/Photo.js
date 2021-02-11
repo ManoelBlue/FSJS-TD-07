@@ -1,6 +1,7 @@
 // Photo stateless component:
 
 const Photo = props => {
+    console.log(props);
     let photo = props.data;
     const {id, server, secret, title} = photo;
 

@@ -10,14 +10,14 @@ class SearchForm extends Component {
 
     handleChange = (e) => {
         this.setState({
-            input: this.query.value
+            input: e.target.value
         })
-        console.log(this.state.input)
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(e);
+        console.log(this.props);
         this.props.onSearch(this.query.value);
         e.currentTarget.reset();
     }

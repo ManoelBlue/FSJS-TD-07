@@ -12,15 +12,22 @@ class App extends Component {
     constructor() {
         super()
         this.state = {
-            photos: []
+            photos: [],
+            cats: [],
+            dogs: [],
+            photos: [],
+            photos: [],
         }
     }
 
     componentDidMount() {
-        this.fetchData();
+        this.fetchData('nature', 'photos');
+        this.fetchData('cats', 'cats');
+        this.fetchData('dogs', 'dogs');
+        this.fetchData('computers', 'computers');
     }
 
-    fetchData = (search = 'animals') => {
+    fetchData = (search, stateName) => {
         let searchText = search.replace(/\s/gi, '+');
         let searchTag = search.replace(/\s/gi, '%2C');
         let url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&tag_mode=all&text=${searchText}&safe_search=3&content_type=1&per_page=24&format=json&nojsoncallback=1`;
@@ -28,29 +35,28 @@ class App extends Component {
         axios.get(url)
             .then(response => {
                 this.setState({
-                    photos: response.data.photos.photo
+                    [`${stateName}`]: response.data.photos.photo
                 })
             })
             .catch(error => console.error('Error fetching data', error));
-
-        return this.state.photos;
     }
 
     render() {
         return (
-        <BrowserRouter>
-            <div className="container">
-                <SearchForm onSearch={this.fetchData} />
-                <Nav />
+            <BrowserRouter>
+                <div className="container">
+                    <SearchForm onSearch={this.fetchData} />
+                    <Nav />
 
-                <Switch>
-                    <Route exact path="/" render={() => <PhotoContainer data={this.fetchData('animals')} />}></Route>
-                    <Route path="/cats" render={() => <PhotoContainer data={this.fetchData('cat')} />}></Route>
-                    <Route path="/dogs" render={() => <PhotoContainer data={this.fetchData('dog')} />}></Route>
-                    <Route path="/computers" render={() => <PhotoContainer data={this.fetchData('computer')} />}></Route>
-                </Switch>
-            </div>
-        </BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
+                        <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />}></Route>
+                        <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />}></Route>
+                        <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} />}></Route>
+                        <Route path="/search" render={() => <PhotoContainer data={this.state.search} />}></Route>
+                    </Switch>
+                </div>
+            </BrowserRouter>
         );
     }
 }
