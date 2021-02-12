@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 
 class SearchForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            input: ''
+            input: '',
+            redirect: false
         }
     }
 
@@ -16,10 +18,9 @@ class SearchForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
-        console.log(this.props);
-        this.props.onSearch(this.query.value);
+        this.props.onSearch(this.query.value, 'search');
         e.currentTarget.reset();
+        this.setState({redirect: true})
     }
 
     render() {
@@ -37,7 +38,9 @@ class SearchForm extends Component {
                         <path d="M0 0h24v24H0z" fill="none"/>
                     </svg>
                 </button>
+                {(this.state.redirect) ? <Redirect to='/search' /> : ''}
             </form>
+
         )
     }
 }
