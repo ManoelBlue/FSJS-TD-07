@@ -7,6 +7,7 @@ import apiKey from './config';
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
 import PhotoContainer from './components/PhotoContainer';
+import NotFound from './components/NotFound';
 
 class App extends Component {
     constructor() {
@@ -60,6 +61,7 @@ class App extends Component {
                                 <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />}></Route>
                                 <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} />}></Route>
                                 <Route path="/search" render={() => <PhotoContainer data={this.state.search} />}></Route>
+                                <Route component={NotFound} />
                             </Switch>
                     }
                 </div>

@@ -1,5 +1,4 @@
 import Photo from './Photo';
-import NotFound from './NotFound';
 
 const PhotoContainer = props => {
     let photos = props.data.map(photo => <Photo key={photo.id} data={photo} />);
@@ -11,7 +10,11 @@ const PhotoContainer = props => {
                 {
                     (photos.length > 0)
                         ? photos
-                        : <NotFound />
+                        :
+                            <li className="not-found">
+                                <h3>No Results Found</h3>
+                                <p>You search did not return any results. Please try again.</p>
+                            </li>
                 }
             </ul>
         </div>
