@@ -1,0 +1,27 @@
+/* Extra styles: */
+
+/* Animation */
+@keyframes line {
+    0% {color: dodgerblue;}
+    50% {color: navy;}
+    100% {color: dodgerblue;}
+}
+
+/* Style: */
+body {
+    background-color: lightblue;
+}
+
+input:focus {
+    border-color: #fefe33;
+    box-shadow: 0 0 15px 5px #ffe135;
+}
+
+.photo-container h2 {
+    animation: line 3s infinite;
+}
+
+.photo-container ul li:hover {
+    box-shadow: 0 0 15px 5px steelblue;
+    transition: 0.5s;
+}
