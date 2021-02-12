@@ -10,12 +10,14 @@ class SearchForm extends Component {
         }
     }
 
+    //  Changes the input state as input value changes:
     handleChange = (e) => {
         this.setState({
             input: e.target.value
         })
     }
 
+    //  Submit search query and redirect to searchpage results:
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onSearch(this.query.value, 'search');

@@ -22,6 +22,7 @@ class App extends Component {
         }
     }
 
+    //  Add data to eh state as component mounts:
     componentDidMount() {
         this.fetchData('nature', 'photos');
         this.fetchData('cats', 'cats');
@@ -29,6 +30,7 @@ class App extends Component {
         this.fetchData('computers', 'computers');
     }
 
+    // Method to fetch data from flickr api:
     fetchData = (search, stateName) => {
         let searchText = search.replace(/\s/gi, '+');
         let searchTag = search.replace(/\s/gi, '%2C');

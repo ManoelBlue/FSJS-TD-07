@@ -1,5 +1,6 @@
 import Photo from './Photo';
 
+//  PhotoContainer stateless component:
 const PhotoContainer = props => {
     let photos = props.data.map(photo => <Photo key={photo.id} data={photo} />);
 
