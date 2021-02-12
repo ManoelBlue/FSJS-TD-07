@@ -1,3 +1,17 @@
+# Full Stack JavaScript Techdegree Project 07
+
+## React Gallery App
+    Uses React JS library to build a image gallery.
+
+## CSS extra styles:
+- body background-color;
+- results headline color animation;
+- input yellow focus (improves accessibility);
+- photos hover box-shadow effect;
+
+### Additional info:
+This project is part of a Techdegree at Treehouse. The application was build using 'create-react-app'. The 'App.css' styles and the markup design were provided. React components, routes, handle methods and all main functionalities were built.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
