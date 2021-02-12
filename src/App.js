@@ -15,8 +15,9 @@ class App extends Component {
             photos: [],
             cats: [],
             dogs: [],
-            photos: [],
-            photos: [],
+            computers: [],
+            search: [],
+            loading: true
         }
     }
 
@@ -35,7 +36,8 @@ class App extends Component {
         axios.get(url)
             .then(response => {
                 this.setState({
-                    [`${stateName}`]: response.data.photos.photo
+                    [`${stateName}`]: response.data.photos.photo,
+                    loading: false
                 })
             })
             .catch(error => console.error('Error fetching data', error));
@@ -48,13 +50,18 @@ class App extends Component {
                     <SearchForm onSearch={this.fetchData} />
                     <Nav />
 
-                    <Switch>
-                        <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
-                        <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />}></Route>
-                        <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />}></Route>
-                        <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} />}></Route>
-                        <Route path="/search" render={() => <PhotoContainer data={this.state.search} />}></Route>
-                    </Switch>
+                    {
+                        (this.state.loading)
+                        ? <p>Loading...</p>
+                        :
+                            <Switch>
+                                <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
+                                <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />}></Route>
+                                <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />}></Route>
+                                <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} />}></Route>
+                                <Route path="/search" render={() => <PhotoContainer data={this.state.search} />}></Route>
+                            </Switch>
+                    }
                 </div>
             </BrowserRouter>
         );

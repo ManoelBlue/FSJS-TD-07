@@ -10,11 +10,9 @@ const PhotoContainer = props => {
             <h2>Results</h2>
             <ul>
                 {
-                    (photos)
-                    ? (photos.length > 0)
+                    (photos.length > 0)
                         ? photos
-                        : <h3>Loading...</h3>
-                    : <NotFound />
+                        : <NotFound />
                 }
             </ul>
         </div>
