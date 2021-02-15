@@ -14,24 +14,18 @@ class App extends Component {
         super()
         this.state = {
             photos: [],
-            cats: [],
-            dogs: [],
-            computers: [],
-            search: [],
+            query: '',
             loading: true
         }
     }
 
     //  Add data to eh state as component mounts:
     componentDidMount() {
-        this.fetchData('nature', 'photos');
-        this.fetchData('cats', 'cats');
-        this.fetchData('dogs', 'dogs');
-        this.fetchData('computers', 'computers');
+        this.fetchData('nature');
     }
 
     // Method to fetch data from flickr api:
-    fetchData = (search, stateName) => {
+    fetchData = (search) => {
         let searchText = search.replace(/\s/gi, '+');
         let searchTag = search.replace(/\s/gi, '%2C');
         let url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&tag_mode=all&text=${searchText}&safe_search=3&content_type=1&per_page=24&format=json&nojsoncallback=1`;
@@ -39,7 +33,7 @@ class App extends Component {
         axios.get(url)
             .then(response => {
                 this.setState({
-                    [`${stateName}`]: response.data.photos.photo,
+                    photos: response.data.photos.photo,
                     loading: false
                 })
             })
@@ -59,10 +53,8 @@ class App extends Component {
                         :
                             <Switch>
                                 <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
-                                <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} />}></Route>
-                                <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} />}></Route>
-                                <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} />}></Route>
-                                <Route path="/search" render={() => <PhotoContainer data={this.state.search} />}></Route>
+                                <Route path="/:query" render={() => <PhotoContainer data={this.state.cats} />}></Route>
+                                <Route path="/search/:query" render={() => <PhotoContainer data={this.state.search} />}></Route>
                                 <Route component={NotFound} />
                             </Switch>
                     }
