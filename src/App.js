@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -10,10 +10,14 @@ import PhotoContainer from './components/PhotoContainer';
 import NotFound from './components/NotFound';
 
 class App extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             photos: [],
+            cats: [],
+            dogs: [],
+            computers: [],
+            search: [],
             query: '',
             loading: true
         }
@@ -21,11 +25,14 @@ class App extends Component {
 
     //  Add data to eh state as component mounts:
     componentDidMount() {
-        this.fetchData('nature');
+        this.fetchData('animals', 'photos');
+        this.fetchData('cats', 'cats');
+        this.fetchData('dogs', 'dogs');
+        this.fetchData('computers', 'computers');
     }
 
     // Method to fetch data from flickr api:
-    fetchData = (search) => {
+    fetchData = (search, stateName) => {
         let searchText = search.replace(/\s/gi, '+');
         let searchTag = search.replace(/\s/gi, '%2C');
         let url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&tag_mode=all&text=${searchText}&safe_search=3&content_type=1&per_page=24&format=json&nojsoncallback=1`;
@@ -33,7 +40,8 @@ class App extends Component {
         axios.get(url)
             .then(response => {
                 this.setState({
-                    photos: response.data.photos.photo,
+                    [`${stateName}`]: response.data.photos.photo,
+                    query: search,
                     loading: false
                 })
             })
@@ -41,6 +49,8 @@ class App extends Component {
     }
 
     render() {
+        let {photos, cats, dogs, computers, search, query} = this.state;
+
         return (
             <BrowserRouter>
                 <div className="container">
@@ -52,9 +62,11 @@ class App extends Component {
                         ? <p>Loading...</p>
                         :
                             <Switch>
-                                <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}></Route>
-                                <Route path="/:query" render={() => <PhotoContainer data={this.state.cats} />}></Route>
-                                <Route path="/search/:query" render={() => <PhotoContainer data={this.state.search} />}></Route>
+                                <Route exact path="/" render={() => <PhotoContainer data={photos} />}></Route>
+                                <Route path="/cats" render={() => <PhotoContainer data={cats} />}></Route>
+                                <Route path="/dogs" render={() => <PhotoContainer data={dogs} />}></Route>
+                                <Route path="/computers" render={() => <PhotoContainer data={computers} />}></Route>
+                                <Route path="/search" render={() => <PhotoContainer data={search} query={query} isSearch={true} />}></Route>
                                 <Route component={NotFound} />
                             </Switch>
                     }

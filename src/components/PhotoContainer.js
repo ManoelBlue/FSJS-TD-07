@@ -1,25 +1,40 @@
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+
 import Photo from './Photo';
 
-//  PhotoContainer stateless component:
-const PhotoContainer = props => {
-    let photos = props.data.map(photo => <Photo key={photo.id} data={photo} />);
+class PhotoContainer extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <div className="photo-container">
-            <h2>Results</h2>
-            <ul>
+    render() {
+        let {isSearch, query} = this.props;
+        let photos = this.props.data.map(photo => <Photo key={photo.id} data={photo} />);
+        console.log(this.props)
+
+        return (
+            <div className="photo-container">
+                <h2>Results</h2>
+                <ul>
+                    {
+                        (photos.length > 0)
+                            ? photos
+                            :
+                                <li className="not-found">
+                                    <h3>No Results Found</h3>
+                                    <p>You search did not return any results. Please try again.</p>
+                                </li>
+                    }
+                </ul>
                 {
-                    (photos.length > 0)
-                        ? photos
-                        :
-                            <li className="not-found">
-                                <h3>No Results Found</h3>
-                                <p>You search did not return any results. Please try again.</p>
-                            </li>
+                    isSearch
+                    ? <Redirect to={`/search/${query}`} />
+                    : null
                 }
-            </ul>
-        </div>
-    )
+            </div>
+        )
+    }
 }
 
 export default PhotoContainer;
