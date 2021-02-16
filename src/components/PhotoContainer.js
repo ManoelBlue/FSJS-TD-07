@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 import Photo from './Photo';
 
 class PhotoContainer extends Component {
-    constructor(props) {
-        super(props);
+
+    componentDidUpdate() {
+        console.log('Update Photo Container');
+        if(/^\/search/i.test(this.props.location.pathname)) {
+            this.props.onSearch(this.props.location.pathname.slice(8), 'search')
+        }
     }
 
     render() {
-        let {isSearch, query} = this.props;
         let photos = this.props.data.map(photo => <Photo key={photo.id} data={photo} />);
         console.log(this.props)
 
@@ -27,11 +29,6 @@ class PhotoContainer extends Component {
                                 </li>
                     }
                 </ul>
-                {
-                    isSearch
-                    ? <Redirect to={`/search/${query}`} />
-                    : null
-                }
             </div>
         )
     }

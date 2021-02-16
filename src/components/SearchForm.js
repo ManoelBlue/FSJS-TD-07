@@ -5,8 +5,7 @@ class SearchForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            input: '',
-            fireRedirect: false
+            input: ''
         }
     }
 
@@ -21,7 +20,7 @@ class SearchForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onSearch(this.query.value, 'search');
-        this.setState({fireRedirect: true})
+        this.props.history.push(`/search/${this.query.value}`);
         e.currentTarget.reset();
     }
 
@@ -40,11 +39,6 @@ class SearchForm extends Component {
                         <path d="M0 0h24v24H0z" fill="none"/>
                     </svg>
                 </button>
-                {
-                    this.state.fireRedirect
-                    ? <Redirect to="/search" />
-                    : null
-                }
             </form>
         )
     }
