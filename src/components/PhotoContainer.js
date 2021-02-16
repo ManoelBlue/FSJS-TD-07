@@ -5,7 +5,6 @@ import Photo from './Photo';
 class PhotoContainer extends Component {
 
     componentDidUpdate() {
-        console.log('Update Photo Container');
         if(/^\/search/i.test(this.props.location.pathname)) {
             this.props.onSearch(this.props.location.pathname.slice(8), 'search')
         }
@@ -13,7 +12,6 @@ class PhotoContainer extends Component {
 
     render() {
         let photos = this.props.data.map(photo => <Photo key={photo.id} data={photo} />);
-        console.log(this.props)
 
         return (
             <div className="photo-container">

@@ -30,10 +30,7 @@ class App extends Component {
         this.fetchData('dogs', 'dogs');
         this.fetchData('computers', 'computers');
 
-        console.log('Mount App')
-
         if(/^\/search/i.test(this.props.location.pathname)) {
-            console.log(this.props.location.pathname.slice(8));
             this.fetchData(this.props.location.pathname.slice(8), 'search')
         }
     }
