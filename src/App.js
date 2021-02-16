@@ -40,6 +40,7 @@ class App extends Component {
 
     // Method to fetch data from flickr api:
     fetchData = (search, stateName) => {
+        this.setState({loading: true});
         let searchText = search.replace(/\s/gi, '+');
         let searchTag = search.replace(/\s/gi, '%2C');
         let url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&tag_mode=all&text=${searchText}&safe_search=3&content_type=1&per_page=24&format=json&nojsoncallback=1`;
